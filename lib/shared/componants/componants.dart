@@ -43,6 +43,7 @@ Widget defaultFormField({
   required IconData prefix,
   bool isPassword = false,
   IconData? suffix,
+  Function? suffixPressed,
 
 }) => TextFormField(
   controller: controller,
@@ -56,8 +57,14 @@ Widget defaultFormField({
     prefixIcon: Icon(
       prefix,
     ),
-    suffixIcon: Icon(
-      suffix,
+    suffixIcon: IconButton(
+      icon: Icon(
+        suffix,
+      ),
+      onPressed: ()
+      {
+        suffixPressed!();
+      },
     ),
   ),
   validator: validator,

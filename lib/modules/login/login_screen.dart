@@ -1,17 +1,26 @@
-import 'dart:html';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_fundamentals/shared/componants/componants.dart';
 
-class LoginScreen extends StatelessWidget
+class LoginScreen extends StatefulWidget
 {
   LoginScreen({Key? key}) : super(key: key);
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   var emailController=TextEditingController();
+
   var passwordController=TextEditingController();
+
   var formKey = GlobalKey<FormState>();
+
+  bool isPassword = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,9 +64,15 @@ class LoginScreen extends StatelessWidget
                       controller: passwordController,
                       label: 'Password',
                       prefix: Icons.lock,
-                      suffix: Icons.remove_red_eye,
+                      suffix: isPassword? Icons.visibility : Icons.visibility_off,
+                      suffixPressed: ()
+                      {
+                        setState(() {
+                          isPassword = !isPassword;
+                        });
+                      },
                       type: TextInputType.visiblePassword,
-                      // isPassword: true,
+                      isPassword: isPassword,
                       validator: (String? value)
                       {
                         if(value!.isEmpty)
